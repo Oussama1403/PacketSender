@@ -1,6 +1,6 @@
-# BS-PacketSender
+# PacketSender
 
-BS-PacketSender is a PyQt5 program that generates a lot of network packets and flood a network with so much traffic that it cannot operate or communicate as it normally.
+PacketSender is a PyQt5 program that generates a lot of network packets and flood a network with so much traffic that it cannot operate or communicate as it normally.
 
 ## Usage
 
