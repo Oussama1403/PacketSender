@@ -12,7 +12,6 @@
   <img  src="https://img.shields.io/github/issues/Oussama1403/PacketSender" />
   <img  src="https://img.shields.io/github/issues-pr/Oussama1403/PacketSender" />
 </p>
-<br/>
 
 PacketSender is a PyQt5 program that generates a lot of network packets and flood a network with so much traffic that it cannot operate or communicate as it normally.
 ![screenshot](screenshot.png)
