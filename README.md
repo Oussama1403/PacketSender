@@ -24,6 +24,10 @@ install pyqt5\
 install nmap\
 install python-nmap module
 
+## Disclaimer
+
+-This project was created for educational purposes and should not be used in environments without legal authorization.
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 ## License
