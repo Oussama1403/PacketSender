@@ -14,12 +14,11 @@
 </p>
 
 
-PacketSender is a PyQt5 program that generates a lot of network packets and flood a network with so much traffic that it cannot operate or communicate as it normally.
+<b>PacketSender is a PyQt5 program that generates a lot of network packets and flood a network with so much traffic that it cannot operate or communicate as it normally.</b>
+
 ![screenshot](screenshot.png)
+
 ## Usage
-
-
-
 ```bash
 python main.py
 ```
